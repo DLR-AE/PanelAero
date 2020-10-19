@@ -7,8 +7,7 @@ import logging
 np.seterr(all='ignore') # turn off warnings (divide by zero, multiply NaN, ...) as singularities are expected to occur
 
 
-import loadskernel.VLM as VLM
-
+import VLM
 
 def calc_Qjj(aerogrid, Ma, k):
     # calc steady contributions using VLM
