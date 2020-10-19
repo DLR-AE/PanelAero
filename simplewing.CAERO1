@@ -1,0 +1,5 @@
+$ This is the CAERO input card (see Nastran Quick Reference Guide) 
+$ for a simple wing with 40x10 panels.
+$------><------><------><------><------><------><------><------><------>
+CAERO1   6401001    1001       0      40      10                       1+       
++            0.0  -0.552     0.0     0.1     0.0  +0.552     0.0     0.1
