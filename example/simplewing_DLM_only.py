@@ -4,10 +4,6 @@ Note that functionalities of the Loads Kernel are used for
 - building the aerogrid from a CAERO card and for
 - plotting the output.
 Presumably, you will replace these two steps during the integration of the DLM into your own software anyway.
-
-hg clone https://phabricator.ae.go.dlr.de/diffusion/LAEK/loads-kernel/
-cd loads-kernel
-hg update devel
 """
 # Imports from python
 import numpy as np
@@ -17,7 +13,7 @@ import sys
 import DLM
 # Imports from loadskernel
 # Here you add the location of the Loads Kernel
-sys.path.append("../loads-kernel")
+sys.path.append("/data/loads-kernel")
 from loadskernel import build_aero_functions, plotting_extra
 
 # Geometrie
