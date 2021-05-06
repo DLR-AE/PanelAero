@@ -4,10 +4,10 @@
 import copy
 import numpy as np
 import logging
-np.seterr(all='ignore') # turn off warnings (divide by zero, multiply NaN, ...) as singularities are expected to occur
+# turn off warnings (divide by zero, multiply NaN, ...) as singularities are expected to occur
+np.seterr(all='ignore')
 
-
-import VLM
+import panelaero.VLM as VLM
 
 def calc_Qjj(aerogrid, Ma, k):
     # calc steady contributions using VLM

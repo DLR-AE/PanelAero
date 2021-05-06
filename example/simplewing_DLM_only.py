@@ -10,10 +10,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 import sys
 # Import from this repository
-import DLM
+import panelaero.DLM as DLM
 # Imports from loadskernel
 # Here you add the location of the Loads Kernel
-sys.path.append("/data/loads-kernel")
+sys.path.append("../../loads-kernel")
 from loadskernel import build_aero_functions, plotting_extra
 
 # Geometrie
