@@ -169,7 +169,12 @@ def calc_Qjj(aerogrid, Ma, xz_symmetry=False):
     if xz_symmetry:
         n = aerogrid['n']
         aerogrid = mirror_aerogrid_xz(aerogrid)
-    Ajj, Bjj = calc_Ajj(aerogrid, Ma)
+    """
+    The function calc_Ajj() is Mach number dependent, which involves a scaling of the aerogrid in x-direction.
+    To make sure that the geometrical scaling has no effect on the following calculations, a 'fresh' a copy of the aerogrid,
+    created with copy.deepcopy(), is handed over. 
+    """
+    Ajj, Bjj = calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma)
     Qjj = -np.linalg.inv(Ajj)
     if xz_symmetry:
         return Qjj[0:n,0:n]-Qjj[n:2*n,0:n], Bjj[0:n,0:n]-Bjj[n:2*n,0:n]
@@ -194,6 +199,6 @@ def calc_Gammas(aerogrid, Ma):
     Gamma = np.zeros((len(Ma), aerogrid['n'], aerogrid['n'])) # dim: Ma,n,n
     Q_ind = np.zeros((len(Ma), aerogrid['n'], aerogrid['n'])) # dim: Ma,n,n
     for i_Ma in range(len(Ma)):
-        Gamma[i_Ma,:,:], Q_ind[i_Ma,:,:] = calc_Gamma(aerogrid, Ma[i_Ma])
+        Gamma[i_Ma,:,:], Q_ind[i_Ma,:,:] = calc_Gamma(aerogrid=copy.deepcopy(aerogrid), Ma=Ma[i_Ma])
     return Gamma, Q_ind
 
