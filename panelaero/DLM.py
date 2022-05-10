@@ -9,7 +9,7 @@ np.seterr(all='ignore')
 
 import panelaero.VLM as VLM
 
-def calc_Qjj(aerogrid, Ma, k):
+def calc_Qjj(aerogrid, Ma, k, method='parabolic'):
     # calc steady contributions using VLM
     Ajj_VLM, Bjj = VLM.calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma)
     if k == 0.0:
@@ -17,7 +17,7 @@ def calc_Qjj(aerogrid, Ma, k):
         Ajj_DLM = np.zeros((aerogrid['n'],aerogrid['n']))
     else:
         # calc oscillatory / unsteady contributions using DLM
-        Ajj_DLM = calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma, k=k)
+        Ajj_DLM = calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma, k=k, method=method)
     Ajj = Ajj_VLM + Ajj_DLM
     Qjj = -np.linalg.inv(Ajj)
     return Qjj
