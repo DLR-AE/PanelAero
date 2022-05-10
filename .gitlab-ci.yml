@@ -1,0 +1,43 @@
+variables:
+  GIT_STRATEGY: clone
+
+stages:
+  - test
+  - deploy
+
+
+test:
+  stage: test
+  timeout: 3 hours
+  coverage: '/^TOTAL.+?(\d+\%)$/'
+  tags:
+    - panelaero
+  script:
+    - which python
+    - which pytest
+    - pytest -v --basetemp=./test_tmp --cov-report xml:coverage.xml --cov=panelaero --junitxml=testresult.xml
+    - coverage xml -o coverage.xml
+    - coverage report
+    - coverage html --directory ./coverage
+  artifacts:
+    when: always
+    paths:
+      - coverage.xml
+      - testresult.xml
+      - coverage/
+    reports:
+      cobertura: coverage.xml
+      junit: testresult.xml
+
+pages:
+  stage: deploy
+  tags:
+    - panelaero
+  dependencies:
+    - test
+  script:
+    - mkdir public
+    - mv coverage public/coverage
+  artifacts:
+    paths:
+      - public
