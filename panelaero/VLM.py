@@ -188,17 +188,24 @@ def calc_Qjjs(aerogrid, Ma, xz_symmetry=False):
         Qjj[i_Ma,:,:], Bjj[i_Ma,:,:] = calc_Qjj(aerogrid, Ma[i_Ma], xz_symmetry)
     return Qjj, Bjj
 
-def calc_Gamma(aerogrid, Ma):
+def calc_Gamma(aerogrid, Ma, xz_symmetry=False):
+    if xz_symmetry:
+        n = aerogrid['n']
+        aerogrid = mirror_aerogrid_xz(aerogrid)
     D1, D2, D3 = calc_induced_velocities(aerogrid, Ma)
     # total D
     Gamma = -np.linalg.inv((D1 + D2 + D3))
     Q_ind = D2 + D3
-    return Gamma, Q_ind
+    
+    if xz_symmetry:
+        return Gamma[0:n,0:n]-Gamma[n:2*n,0:n], Q_ind[0:n,0:n]-Q_ind[n:2*n,0:n]
+    else:
+        return Gamma, Q_ind
 
-def calc_Gammas(aerogrid, Ma):
+def calc_Gammas(aerogrid, Ma, xz_symmetry=False):
     Gamma = np.zeros((len(Ma), aerogrid['n'], aerogrid['n'])) # dim: Ma,n,n
     Q_ind = np.zeros((len(Ma), aerogrid['n'], aerogrid['n'])) # dim: Ma,n,n
     for i_Ma in range(len(Ma)):
-        Gamma[i_Ma,:,:], Q_ind[i_Ma,:,:] = calc_Gamma(aerogrid=copy.deepcopy(aerogrid), Ma=Ma[i_Ma])
+        Gamma[i_Ma,:,:], Q_ind[i_Ma,:,:] = calc_Gamma(aerogrid, Ma[i_Ma], xz_symmetry)
     return Gamma, Q_ind
 
