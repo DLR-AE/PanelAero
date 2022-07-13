@@ -30,6 +30,15 @@ class TestSimplewing(HelperFunctions):
         with open('./tests/reference_data/simplewing_VLM_Ma03.pickle', 'rb') as fid:
             reference_data = pickle.load(fid)
         assert self.compare_AICs(Qjj, reference_data, self.aerogrid['n']), "AIC does NOT match reference"
+    
+    def test_VLM_sequence_of_mach_numbers(self):      
+        # Calculate the AIC matrix
+        Qjjs = VLM.calc_Qjjs(self.aerogrid, Ma=[0.7, 0.3]) 
+        # Do the comparison
+        print('Comparing AIC with reference')
+        with open('./tests/reference_data/simplewing_VLM_Ma03.pickle', 'rb') as fid:
+            reference_data = pickle.load(fid)
+        assert self.compare_AICs(Qjjs[0][1,:,:], reference_data[0], self.aerogrid['n']), "AIC does NOT match reference"
  
     def test_DLM_Ma00_k02(self):      
         # Calculate the AIC matrix
