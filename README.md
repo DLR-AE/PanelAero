@@ -11,3 +11,34 @@ Master branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/
 Development branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/devel/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/devel)
 
 Test coverage [![coverage](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/coverage.svg)](https://loads-kernel.pages.gitlab.dlr.de/panel-aero/coverage/)
+
+# Installation & Use
+## User installation 
+To install everything as a python package, including dependencies:
+
+```
+pip install --user git+https://gitlab.dlr.de/loads-kernel/panel-aero.git 
+```
+## How can I use it?
+
+In Python, you can import the VLM or the DLM as shown below. For further details, please see the example section.
+
+```
+import panelaero.VLM as VLM
+import panelaero.DLM as DLM
+```
+
+## Developer installation 
+As above, but with access to the code (keep the code where it is so that you can explore and modify):
+
+```
+git clone https://gitlab.dlr.de/loads-kernel/panel-aero.git 
+cd ./panel-aero
+pip install --user -e . 
+```
+
+
+
+## Feedback
+Please provide your feedback via merge requests (please see [CONTRIBUTING.md](CONTRIBUTING.md)
+for details) or contact contact Arne Voß, arne.voss@dlr.de.
