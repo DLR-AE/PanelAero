@@ -26,7 +26,6 @@ test:
       - testresult.xml
       - coverage/
     reports:
-      cobertura: coverage.xml
       junit: testresult.xml
 
 pages:
