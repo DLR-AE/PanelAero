@@ -40,10 +40,16 @@ pip install --user -e .
 ```
 
 # License
-This software is developed for scientific applications and is delivered as open source without any liability (BSD 3-Clause, please see [LICENSE](LICENSE) for details). A validation against test data and/or other simulation tools is highly recommended and in the responsibility of the user. 
+This software is developed for scientific applications and is delivered as open source without any liability (BSD 3-Clause, please see the [license](LICENSE) for details). For every new aircraft, a validation against test data and/or other simulation tools is highly recommended and in the responsibility of the user. 
 
 If you use this software for your scientific work, we kindly ask you to include a reference in your publications. Thank you!
 
-# Feedback
-Please provide your feedback via merge requests (please see [CONTRIBUTING.md](CONTRIBUTING.md)
-for details) or contact Arne Voß, arne.voss@dlr.de.
+# Feedback & Support
+Note that this is a scientific software for users with a background in aerospace engineering and with a good understanding and experience in aeroelasticity. If you know what you are doing - go ahead and have fun! If you need specific help or assistence, we offer commerical support:
+- Development of additional, proprietary features
+- Consulting & Training courses
+- Service & Support
+
+We are interested in partnerships from both industry and academia, so feel free to contact Arne Voß (arne.voss@dlr.de).
+
+If you discoverd an obvious bug, please open an [issue](https://gitlab.dlr.de/loads-kernel/panel-aero/-/issues). In case you already know how to fix it, please provide your feedback via merge requests. For details, please see the [instructions](CONTRIBUTING.md) on how to provide a contribution or contact arne.voss@dlr.de if you need any assistance with that.
