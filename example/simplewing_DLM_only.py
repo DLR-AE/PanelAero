@@ -1,41 +1,38 @@
 """
 This is a short demonstration on how to use the DLM at the example of a simple wing.
-Note that functionalities of the Loads Kernel are used for
-- building the aerogrid from a CAERO card and for
-- plotting the output.
-Presumably, you will replace these two steps during the integration of the DLM into your own software anyway.
 """
 # Imports from python
 import numpy as np
-import sys
-# Import from this repository
-import panelaero.DLM as DLM
-# Imports from loadskernel
-# Here you add the location of the Loads Kernel
-sys.path.append("../../loads-kernel")
-from loadskernel import build_aero_functions, plotting_extra
 
-class NewModel():
-    def build_aerogrid(self):
-        self.aerogrid = build_aero_functions.build_aerogrid('./simplewing.CAERO1', method_caero = 'CAERO1')
-        
-model = NewModel()
+# Import from this repository
+from panelaero import DLM
+from example.build_aeromodel import AeroModel
+from example.plotting import DetailedPlots
+
+# build a model that includes the aerodynmic grid
+model = AeroModel('./simplewing.CAERO1')
 model.build_aerogrid()
 
-# DLM
-Qjj = DLM.calc_Qjj(model.aerogrid, Ma=0.0, k=0.1) # with k = omega/U, the "classical" definition, not Nastran definition!
+# run the DLM
+# with k = omega/U, the "classical" definition, not Nastran definition!
+Qjj = DLM.calc_Qjj(model.aerogrid, Ma=0.0, k=0.1) 
 
-# Anströmung
+# set-up some generic onflow
 Vtas = 25.0
 q_dyn = 1.225/2.0 * Vtas**2
-wj = np.ones(model.aerogrid['n']) * 1.0/Vtas # downwash von 1.0 m/s auf jedes Panel, skaliert mit Vtas
-# Beispielrechnung
+# downwash of 1.0 m/s on every panel, scaled with Vtas
+wj = np.ones(model.aerogrid['n']) * 1.0/Vtas 
+# calculate the pressure coefficent distribution
 cp = Qjj.dot(wj)
-Fxyz = q_dyn * model.aerogrid['N'].T * model.aerogrid['A'] * Qjj.dot(wj)
 
-# Plot von Real und Imaginärteil
-plots = plotting_extra.DetailedPlots(jcl='', model=model)
+# Plot of real and imaginary parts, note that these plots use mayavi and tvtk
+# (possibly not installed by default and to keep the list of dependencies small).
+plots = DetailedPlots(model=model)
 plots.plot_aerogrid(cp.real)
 plots.plot_aerogrid(cp.imag)
+
+# a force vector is calculated like this
+Fxyz = q_dyn * model.aerogrid['N'].T * model.aerogrid['A'] * Qjj.dot(wj)
+
 
 print('Done.')

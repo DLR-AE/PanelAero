@@ -41,4 +41,4 @@ pip install --user -e .
 
 ## Feedback
 Please provide your feedback via merge requests (please see [CONTRIBUTING.md](CONTRIBUTING.md)
-for details) or contact contact Arne Voß, arne.voss@dlr.de.
+for details) or contact Arne Voß, arne.voss@dlr.de.
