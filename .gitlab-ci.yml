@@ -24,7 +24,7 @@ test:
     paths:
       - coverage.xml
       - testresult.xml
-      - coverage/
+      - coverage
     reports:
       coverage_report:
         coverage_format: cobertura
