@@ -4,6 +4,8 @@ A Vortex Lattice Method (VLM) and a Doublet Lattice Method (DLM) is implemented 
 # Reference
 Voß, A., “An Implementation of the Vortex Lattice and the Doublet Lattice Method,” Institut für Aeroelastik, Deutsches Zentrum für Luft- und Raumfahrt, Göttingen, Germany, Technical Report DLR-IB-AE-GO-2020-137, Oktober 2020, https://elib.dlr.de/136536/.
 
+If you use this software for your scientific work, we kindly ask you to include a reference in your publications. Thank you!
+
 # Continuous Integration
 
 Master branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/master)
@@ -37,8 +39,11 @@ cd ./panel-aero
 pip install --user -e . 
 ```
 
+# License
+This software is developed for scientific applications and is delivered as open source without any liability (BSD 3-Clause, please see [LICENSE](LICENSE) for details). A validation against test data and/or other simulation tools is highly recommended and in the responsibility of the user. 
 
+If you use this software for your scientific work, we kindly ask you to include a reference in your publications. Thank you!
 
-## Feedback
+# Feedback
 Please provide your feedback via merge requests (please see [CONTRIBUTING.md](CONTRIBUTING.md)
 for details) or contact Arne Voß, arne.voss@dlr.de.
