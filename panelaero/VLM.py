@@ -125,12 +125,16 @@ def mirror_aerogrid_xz(aerogrid):
     tmp = copy.deepcopy(aerogrid)
     # mirror y-coord
     tmp['offset_j'][:,1]  = - tmp['offset_j'][:,1]
+    tmp['offset_k'][:,1]  = - tmp['offset_k'][:,1]
+    tmp['offset_l'][:,1]  = - tmp['offset_l'][:,1]
     tmp['offset_P1'][:,1] = - tmp['offset_P1'][:,1]
     tmp['offset_P3'][:,1] = - tmp['offset_P3'][:,1]
     tmp['N'][:,1] = - aerogrid['N'][:,1]
     tmp['N'][:,2] = - aerogrid['N'][:,2]
     # assemble both grids
     aerogrid_xzsym = {'offset_j':  np.vstack((aerogrid['offset_j'],  tmp['offset_j'])),
+                      'offset_k':  np.vstack((aerogrid['offset_k'],  tmp['offset_l'])),
+                      'offset_l':  np.vstack((aerogrid['offset_k'],  tmp['offset_l'])),
                       'offset_P1': np.vstack((aerogrid['offset_P1'], tmp['offset_P1'])),
                       'offset_P3': np.vstack((aerogrid['offset_P3'], tmp['offset_P3'])),
                       'N': np.vstack((aerogrid['N'], tmp['N'])),
