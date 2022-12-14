@@ -17,7 +17,11 @@ def my_setup():
           license='internal use',
           packages=find_packages(),
           python_requires='>=3.7',
-          install_requires=['numpy'],
+          install_requires=[
+              'numpy',
+              'pytest',
+              'pytest-cov',
+              ],
           )
 
 if __name__ == '__main__':
