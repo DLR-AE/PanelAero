@@ -5,6 +5,10 @@ stages:
   - test
   - deploy
 
+.virtenv: &virtualenv
+  - python -m venv buildenv
+  - . buildenv/bin/activate
+  - pip install .
 
 test:
   stage: test
@@ -13,6 +17,7 @@ test:
   tags:
     - panelaero
   script:
+    - *virtualenv
     - which python
     - which pytest
     - pytest -v --basetemp=./test_tmp --cov-report xml:coverage.xml --cov=panelaero --junitxml=testresult.xml
