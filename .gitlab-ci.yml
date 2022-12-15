@@ -11,13 +11,13 @@ stages:
   - . buildenv/bin/activate
 
 build:
+  # This stage only tests if the installation is possible.
+  # The evironment created herein will be discared and re-created in the test stage.
   stage: build
   tags:
     - panelaero
   script:
     - *virtualenv
-    - which python
-    - which pytest
     - pip install .
 
 test:
@@ -30,6 +30,11 @@ test:
     - build
   script:
     - *virtualenv
+    # Install with -e (in editable mode) to allow the tracking of the test coverage
+    - pip install -e .
+    - which python
+    - which pytest
+    # Run the actual testing
     - pytest -v --basetemp=./test_tmp --cov-report xml:coverage.xml --cov=panelaero --junitxml=testresult.xml
     - coverage xml -o coverage.xml
     - coverage report
