@@ -7,4 +7,3 @@
 
 # Describe alternatives you've considered
 *Please give a short and clear description of any alternative solutions or features you've considered.*
-

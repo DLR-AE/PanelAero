@@ -1,11 +1,3 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
----
 
 *Note: If this is a general question or difficulty in installing or using the software, please ask in the [Discussions](https://github.com/DLR-AE/PanelAero/discussions) section or contact arne.voss@dlr.de or someone else for help instead.*
 
