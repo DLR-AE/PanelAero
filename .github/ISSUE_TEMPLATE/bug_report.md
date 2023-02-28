@@ -1,19 +1,38 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
 
-*Note: If this is a general question or difficulty in installing or using the software, please ask in the [Discussions](https://github.com/DLR-AE/PanelAero/discussions) section or contact arne.voss@dlr.de or someone else for help instead.*
+---
 
-# Describe the bug
-*Please give a short and clear description of what the bug is and what you expected to happen. Please provide instructions and data to reproduce the problem (model, jcl, etc.). Please provide the smallest working example that reproduces the problem.*
+**Describe the bug**
+A clear and concise description of what the bug is.
 
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-# Bug report checklist
-*Please make sure that you have followed the checklist below, many common problems can be solved by:*
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-- [ ] Consulting the examples.
-- [ ] Asking someone for help to make sure there is no obvious mistake in the input.
-- [ ] Updating to the newest version of the software (either devel or master branch).
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
 
-# Your Environment
- - OS: e.g. Linux Redhat 7.9
- - Python version: e.g. 3.8.12
- - Loads Kernel Version: e.g. 2022.08
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
+
+**Additional context**
+Add any other context about the problem here.
