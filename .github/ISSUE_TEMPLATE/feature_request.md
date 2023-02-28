@@ -1,3 +1,10 @@
+---
+name: Feature Request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
+---
 
 # Is your feature request related to a problem? Please describe.
 *Please give a short and clear description of your problem. Example: I'm always frustrated when ...*
