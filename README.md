@@ -6,20 +6,12 @@ Voß, A., “An Implementation of the Vortex Lattice and the Doublet Lattice Met
 
 If you use this software for your scientific work, we kindly ask you to include a reference to this report in your publications. Thank you!
 
-# Continuous Integration
-
-Master branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/master)
-
-Development branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/devel/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/devel)
-
-Test coverage [![coverage](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/coverage.svg)](https://loads-kernel.pages.gitlab.dlr.de/panel-aero/coverage/)
-
 # Installation & Use
 ## User installation 
 To install everything as a python package, including dependencies:
 
 ```
-pip install --user git+https://gitlab.dlr.de/loads-kernel/panel-aero.git 
+pip install --user git+https://github.com/DLR-AE/PanelAero.git
 ```
 ## How can I use it?
 
@@ -34,7 +26,7 @@ import panelaero.DLM as DLM
 As above, but with access to the code (keep the code where it is so that you can explore and modify):
 
 ```
-git clone https://gitlab.dlr.de/loads-kernel/panel-aero.git 
+git clone https://github.com/DLR-AE/PanelAero.git
 cd ./panel-aero
 pip install --user -e . 
 ```
@@ -50,6 +42,15 @@ Note that this is a scientific software for users with a background in aerospace
 - Consulting & Training courses
 - Service & Support
 
-We are interested in partnerships from both industry and academia, so feel free to contact Arne Voß (arne.voss@dlr.de).
+We are interested in partnerships from both industry and academia, so feel free to contact us (arne.voss@dlr.de).
 
-If you discoverd an obvious bug, please open an [issue](https://gitlab.dlr.de/loads-kernel/panel-aero/-/issues). In case you already know how to fix it, please provide your feedback via merge requests. For details, please see the [instructions](CONTRIBUTING.md) on how to provide a contribution or contact arne.voss@dlr.de if you need any assistance with that.
+If you discoverd an obvious bug, please open an [issue](https://github.com/DLR-AE/PanelAero/issues). In case you already know how to fix it, please provide your feedback via merge requests. For details, please see the [instructions](CONTRIBUTING.md) on how to provide a contribution or contact arne.voss@dlr.de if you need any assistance with that.
+
+# Continuous Integration
+Status of the (internal) DLR GitLab continuous integration pipelines:
+
+Master branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/master)
+
+Development branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/devel/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/devel)
+
+Test coverage [![coverage](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/coverage.svg)](https://loads-kernel.pages.gitlab.dlr.de/panel-aero/coverage/)
