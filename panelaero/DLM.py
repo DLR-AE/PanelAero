@@ -73,6 +73,11 @@ def calc_Ajj(aerogrid, Ma, k, method='parabolic'):
     e2 = e**2.0; e3 = e**3.0; e4 = e**4.0
     chord = np.repeat(np.array(aerogrid['l'], ndmin=2), aerogrid['n'], axis=0)
     
+    # Catch panels which are not defined from left to right and issue a warning.
+    # Not sure with purely vertical panels though (bottom to top vs. top to bottom)...
+    if np.any( aerogrid['N'][:,2] < 0.0 ):
+        logging.warning('Detected upside down / flipped aerodynamic panels! \n User action: Always define panels from left to right.')
+    
     # cartesian coordinates of receiving points relative to sending points
     xsr = np.array(Pr[:,0], ndmin=2).T - np.array(Ps[:,0], ndmin=2)
     ysr = np.array(Pr[:,1], ndmin=2).T - np.array(Ps[:,1], ndmin=2)
