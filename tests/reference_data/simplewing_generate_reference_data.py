@@ -1,10 +1,8 @@
 # Imports from python
-import sys
 import pickle
 # Import from this repository
 from panelaero import VLM, DLM
 # Imports from loadskernel
-sys.path.append("../../../loads-kernel")
 from loadskernel import build_aero_functions
 
 

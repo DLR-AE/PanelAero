@@ -1,4 +1,3 @@
-import sys
 import pickle
 
 from panelaero import VLM, DLM

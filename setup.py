@@ -21,8 +21,7 @@ def my_setup():
           install_requires=[
               'numpy',
               'pytest',
-              'pytest-cov',
-              ],
+              'pytest-cov',],
           )
 
 
