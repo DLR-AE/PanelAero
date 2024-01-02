@@ -5,6 +5,7 @@ class AeroModel():
 
     def __init__(self, filename):
         self.filename = filename
+        self.aerogrid = None
 
     def build_aerogrid(self):
         caero_grid, caero_panels = self.read_CAERO(self.filename, 0)
@@ -83,7 +84,7 @@ class AeroModel():
         self.aerogrid = aerogrid
 
     def read_CAERO(self, filename, i_file):
-        print('Read CAERO1 and/or CAERO7 cards from Nastran/ZAERO bdf: %s' % filename)
+        print('Read CAERO1 and/or CAERO7 cards from Nastran/ZAERO bdf: {}'.format(filename))
         caerocards = []
         with open(filename, 'r') as fid:
             while True:

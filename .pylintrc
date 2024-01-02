@@ -1,0 +1,8 @@
+[MESSAGES CONTROL]
+# Disable the message, report, category or checker with the given id(s).
+# C0103 - doesn't conform to snake_case naming style
+# C0114-6  - Missing docstring
+disable=C0103,C0114,C0115,C0116
+
+# Set same max. line length as with Flake8
+max-line-length=127
