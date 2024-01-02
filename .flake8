@@ -1,2 +1,5 @@
 [flake8]
+# Use less conservative limit for max. line length, we all have wider screens today.
 max-line-length = 127
+# Allow ambiguous variable names such as 'l'.
+ignore = E741
