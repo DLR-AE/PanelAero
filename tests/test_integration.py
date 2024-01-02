@@ -1,13 +1,8 @@
 import sys
 import pickle
 
-"""
-This section sets the environment for the gitlab-runner, which uses the functional account 'f_jwsb'.
-First, we  add the location of the Panel Aero to the python path.
-"""
-sys.path.append("../panel-aero")
 from panelaero import VLM, DLM
-from helper_functions import HelperFunctions
+from tests.helper_functions import HelperFunctions
 
 
 class TestSimplewing(HelperFunctions):
