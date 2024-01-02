@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import numpy as np
 import logging
+import numpy as np
 
-import panelaero.VLM as VLM
+from panelaero import VLM
 
 # turn off warnings (divide by zero, multiply NaN, ...) as singularities are expected to occur
 np.seterr(all='ignore')
@@ -34,10 +34,10 @@ def calc_Qjjs(aerogrid, Ma, k, xz_symmetry=False):
         aerogrid = VLM.mirror_aerogrid_xz(aerogrid)
 
     # loop over mach number and freq.
-    for im in range(len(Ma)):
+    for im in enumerate(Ma):
         # calc steady contributions using VLM
         Ajj_VLM, Bjj = VLM.calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma[im])
-        for ik in range(len(k)):
+        for ik in enumerate(k):
             if k[ik] == 0.0:
                 # no oscillatory / unsteady contributions at k=0.0
                 Ajj_DLM = np.zeros((aerogrid['n'], aerogrid['n']))
@@ -112,7 +112,7 @@ def calc_Ajj(aerogrid, Ma, k, method='parabolic'):
     L = np.log(((ybar - e) ** 2.0 + zbar2) / ((ybar + e) ** 2.0 + zbar2))  # Checked with Nastran idf1.f
 
     # Condition 1, planar, the value of 0.001 is taken from Nastran
-    i0 = (np.abs(zbar) / e <= 0.001)
+    i0 = np.abs(zbar) / e <= 0.001
     # Condition 2, co-planar / close-by
     ia = (np.abs(ratio) <= 0.3) & (np.abs(zbar) / e > 0.001)
     # Condition 3, the rest / further away
@@ -334,7 +334,7 @@ def kernelfunction(xbar, ybar, zbar, gamma_sr, tanLambda, ebar, k, M, method='La
     # applies to eq 11, 7 and 8 where it is not clear which parts belong to the denominator.
 
     r1 = ((ybar - ebar) ** 2.0 + zbar ** 2.0) ** 0.5  # Rodden 1971, eq 4
-    beta2 = (1.0 - (M ** 2.0))  # Rodden 1971, eq 9
+    beta2 = 1.0 - (M ** 2.0)  # Rodden 1971, eq 9
     R = ((xbar - ebar * tanLambda) ** 2.0 + beta2 * r1 ** 2.0) ** 0.5  # Rodden 1971, eq 10
     u1 = (M * R - xbar + ebar * tanLambda) / (beta2 * r1)  # Rodden 1971, eq 11
     k1 = k * r1  # Rodden 1971, eq 12 with k = w/U

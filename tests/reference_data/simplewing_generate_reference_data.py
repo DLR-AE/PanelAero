@@ -1,9 +1,9 @@
 # Imports from python
 import pickle
-# Import from this repository
-from panelaero import VLM, DLM
 # Imports from loadskernel
 from loadskernel import build_aero_functions
+# Import from this repository
+from panelaero import VLM, DLM
 
 
 class NewModel():

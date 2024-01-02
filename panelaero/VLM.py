@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-import numpy as np
 import copy
+import numpy as np
 
 
 def calc_induced_velocities(aerogrid, Ma):
@@ -173,23 +173,21 @@ def calc_Qjj(aerogrid, Ma, xz_symmetry=False):
     if xz_symmetry:
         n = aerogrid['n']
         aerogrid = mirror_aerogrid_xz(aerogrid)
-    """
-    The function calc_Ajj() is Mach number dependent, which involves a scaling of the aerogrid in x-direction.
-    To make sure that the geometrical scaling has no effect on the following calculations, a 'fresh' a copy of the aerogrid,
-    created with copy.deepcopy(), is handed over.
-    """
+
+    # The function calc_Ajj() is Mach number dependent, which involves a scaling of the aerogrid in x-direction.
+    # To make sure that the geometrical scaling has no effect on the following calculations, a 'fresh' a copy of the aerogrid,
+    # created with copy.deepcopy(), is handed over.
     Ajj, Bjj = calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma)
     Qjj = -np.linalg.inv(Ajj)
     if xz_symmetry:
         return Qjj[0:n, 0:n] - Qjj[n:2 * n, 0:n], Bjj[0:n, 0:n] - Bjj[n:2 * n, 0:n]
-    else:
-        return Qjj, Bjj
+    return Qjj, Bjj
 
 
 def calc_Qjjs(aerogrid, Ma, xz_symmetry=False):
     Qjj = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
     Bjj = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
-    for i_Ma in range(len(Ma)):
+    for i_Ma in enumerate(Ma):
         Qjj[i_Ma, :, :], Bjj[i_Ma, :, :] = calc_Qjj(aerogrid, Ma[i_Ma], xz_symmetry)
     return Qjj, Bjj
 
@@ -205,13 +203,12 @@ def calc_Gamma(aerogrid, Ma, xz_symmetry=False):
 
     if xz_symmetry:
         return Gamma[0:n, 0:n] - Gamma[n:2 * n, 0:n], Q_ind[0:n, 0:n] - Q_ind[n:2 * n, 0:n]
-    else:
-        return Gamma, Q_ind
+    return Gamma, Q_ind
 
 
 def calc_Gammas(aerogrid, Ma, xz_symmetry=False):
     Gamma = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
     Q_ind = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
-    for i_Ma in range(len(Ma)):
+    for i_Ma in enumerate(Ma):
         Gamma[i_Ma, :, :], Q_ind[i_Ma, :, :] = calc_Gamma(aerogrid, Ma[i_Ma], xz_symmetry)
     return Gamma, Q_ind
