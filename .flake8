@@ -1,5 +1,6 @@
 [flake8]
 # Use less conservative limit for max. line length, we all have wider screens today.
 max-line-length = 127
-# Allow ambiguous variable names such as 'l'.
-ignore = E741
+# E741 - allow ambiguous variable names such as 'l'.
+# W503 - line breaks should occur before the binary operator (this will become best-practise in the furture)
+ignore = E741, W503
