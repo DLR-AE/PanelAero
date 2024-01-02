@@ -15,7 +15,7 @@ def my_setup():
           url='https://github.com/DLR-AE/PanelAero',
           author='Arne Voß',
           author_email='arne.voss@dlr.de',
-          license='internal use',
+          license='BSD 3-Clause License',
           packages=find_packages(),
           python_requires='>=3.7',
           install_requires=[
