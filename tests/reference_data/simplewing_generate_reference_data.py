@@ -1,16 +1,20 @@
 # Imports from python
-import sys, pickle
+import sys
+import pickle
 # Import from this repository
 from panelaero import VLM, DLM
 # Imports from loadskernel
 sys.path.append("../../../loads-kernel")
 from loadskernel import build_aero_functions
 
-class NewModel():
-    def build_aerogrid(self, filename):
-        self.aerogrid = build_aero_functions.build_aerogrid(filename, method_caero = 'CAERO1')
 
-# Build the aerogrid       
+class NewModel():
+
+    def build_aerogrid(self, filename):
+        self.aerogrid = build_aero_functions.build_aerogrid(filename, method_caero='CAERO1')
+
+
+# Build the aerogrid
 model = NewModel()
 model.build_aerogrid('../../example/simplewing.CAERO1')
 
@@ -18,7 +22,7 @@ with open('./simplewing_aerogrid.pickle', 'wb') as fid:
     pickle.dump(model.aerogrid, fid)
 
 # VLM
-Qjj = VLM.calc_Qjj(model.aerogrid, Ma=0.0) 
+Qjj = VLM.calc_Qjj(model.aerogrid, Ma=0.0)
 with open('./simplewing_VLM_Ma00.pickle', 'wb') as fid:
     pickle.dump(Qjj, fid)
 
