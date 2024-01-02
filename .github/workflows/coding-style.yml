@@ -1,11 +1,11 @@
-# This workflow will install and then lint the code with Flake8.
+# This workflow will install and then lint the code with Flake8 and Pylint.
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Coding style
 
 on:
   push:
-    branches: ['master', 'devel' ]
+    branches: ['master', 'devel']
   pull_request:
     branches: '*'
 
@@ -14,9 +14,7 @@ permissions:
 
 jobs:
   Flake8:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -33,3 +31,22 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # The GitHub editor is 127 chars wide
         flake8 . --count --max-line-length=127 --max-complexity=15 --statistics
+
+Pylint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    - name: Analysing the code with pylint
+      run: |
+        pylint . --recursive=y --fail-under=8.0
