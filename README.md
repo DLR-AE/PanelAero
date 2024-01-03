@@ -50,10 +50,13 @@ If you discoverd an obvious bug, please open an [issue](https://github.com/DLR-A
 
 # Continuous Integration
 Status of the continuous integration pipelines:
+
 Master branch 
+
 [![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=master)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
 [![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=master)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
 
 Development branch 
+
 [![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
 [![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
