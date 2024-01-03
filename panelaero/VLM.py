@@ -187,8 +187,8 @@ def calc_Qjj(aerogrid, Ma, xz_symmetry=False):
 def calc_Qjjs(aerogrid, Ma, xz_symmetry=False):
     Qjj = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
     Bjj = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
-    for i_Ma in enumerate(Ma):
-        Qjj[i_Ma, :, :], Bjj[i_Ma, :, :] = calc_Qjj(aerogrid, Ma[i_Ma], xz_symmetry)
+    for i, i_Ma in enumerate(Ma):
+        Qjj[i, :, :], Bjj[i, :, :] = calc_Qjj(aerogrid, i_Ma, xz_symmetry)
     return Qjj, Bjj
 
 
@@ -209,6 +209,6 @@ def calc_Gamma(aerogrid, Ma, xz_symmetry=False):
 def calc_Gammas(aerogrid, Ma, xz_symmetry=False):
     Gamma = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
     Q_ind = np.zeros((len(Ma), aerogrid['n'], aerogrid['n']))  # dim: Ma,n,n
-    for i_Ma in enumerate(Ma):
-        Gamma[i_Ma, :, :], Q_ind[i_Ma, :, :] = calc_Gamma(aerogrid, Ma[i_Ma], xz_symmetry)
+    for i, i_Ma in enumerate(Ma):
+        Gamma[i, :, :], Q_ind[i, :, :] = calc_Gamma(aerogrid, i_Ma, xz_symmetry)
     return Gamma, Q_ind

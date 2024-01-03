@@ -1,0 +1,43 @@
+# This workflow will install and then lint the code with Flake8 and Pylint.
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Regression Tests
+
+on:
+  push:
+    branches: ['master', 'devel']
+  pull_request:
+    branches: '*'
+
+jobs:
+  Pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+      # Add multiple Python versions here to run tests on new(er) versions.
+        python-version: ["3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Build and install
+      run: |
+        python -m pip install --upgrade pip
+        # Install with -e (in editable mode) to allow the tracking of the test coverage
+        pip install -e .
+    - name: Analyse the code with pytest
+      run: |
+        # Run the actual testing
+        pytest -v --cov=panelaero --junitxml=testresult.xml
+        # Create some reports
+        coverage report
+        coverage xml -o coverage.xml
+        coverage html --directory ./coverage
+    - name: Upload HTML coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage
+        path: ./coverage
+        if-no-files-found: ignore

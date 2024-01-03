@@ -13,7 +13,7 @@ np.seterr(all='ignore')
 
 def calc_Qjj(aerogrid, Ma, k, method='parabolic'):
     # calc steady contributions using VLM
-    Ajj_VLM, Bjj = VLM.calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma)
+    Ajj_VLM, _ = VLM.calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma)
     if k == 0.0:
         # no oscillatory / unsteady contributions at k=0.0
         Ajj_DLM = np.zeros((aerogrid['n'], aerogrid['n']))
@@ -34,16 +34,16 @@ def calc_Qjjs(aerogrid, Ma, k, xz_symmetry=False):
         aerogrid = VLM.mirror_aerogrid_xz(aerogrid)
 
     # loop over mach number and freq.
-    for im in enumerate(Ma):
+    for im, Ma_i in enumerate(Ma):
         # calc steady contributions using VLM
-        Ajj_VLM, Bjj = VLM.calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma[im])
-        for ik in enumerate(k):
-            if k[ik] == 0.0:
+        Ajj_VLM, _ = VLM.calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma_i)
+        for ik, k_i in enumerate(k):
+            if k_i == 0.0:
                 # no oscillatory / unsteady contributions at k=0.0
                 Ajj_DLM = np.zeros((aerogrid['n'], aerogrid['n']))
             else:
                 # calc oscillatory / unsteady contributions using DLM
-                Ajj_DLM = calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma[im], k=k[ik], method='parabolic')
+                Ajj_DLM = calc_Ajj(aerogrid=copy.deepcopy(aerogrid), Ma=Ma_i, k=k_i, method='parabolic')
             Ajj = Ajj_VLM + Ajj_DLM
             Ajj_inv = -np.linalg.inv(Ajj)
             if xz_symmetry:
