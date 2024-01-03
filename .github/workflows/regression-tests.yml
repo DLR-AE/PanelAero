@@ -36,13 +36,14 @@ jobs:
         coverage xml -o coverage.xml
         coverage html --directory ./coverage
     - name: Upload HTML coverage report
+      # This is not a normal artifact but one that can be deployed to the GitHub pages in the next step
       uses: actions/upload-pages-artifact@v3
       with:
-        name: github-pages
+        name: github-pages # This name may not be changed according to the documentation
         path: ./coverage
         if-no-files-found: ignore
   
-  deploy-coverage:
+  deploy-pages:
     # Add a dependency to the build job
     needs: Pytest
 
@@ -55,8 +56,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Setup Pages
