@@ -34,8 +34,15 @@ jobs:
         # Create some reports
         coverage report
         coverage xml -o coverage.xml
-        coverage html --directory ./coverage
-    - name: Upload HTML coverage report
+        # Put the html into a 2nd-level sub-folder and use 1st-level subfolder for uploading to maintain folder
+        coverage html --directory ./coverage/coverage
+    - name: Upload HTML coverage report as an artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage
+        path: ./coverage
+        if-no-files-found: ignore
+    - name: Upload HTML coverage report for pages
       # This is not a normal artifact but one that can be deployed to the GitHub pages in the next step
       uses: actions/upload-pages-artifact@v3
       with:
