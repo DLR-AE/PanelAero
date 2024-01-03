@@ -1,7 +1,9 @@
 # An Implementation of the Vortex Lattice and the Doublet Lattice Method
 A Vortex Lattice Method (VLM) and a Doublet Lattice Method (DLM) is implemented in Python. The aerodynamic influence matrices (AICs) obtained from this implementation are validated with respect to MSC.Nastran for both the parabolic and the quartic integration schemes of the DLM. The test cases include dihedral and sweep of the main wing, wing-empennage configurations with the horizontal tail planar to the main wing, co-planar and further away (e.g. T-tail) and with/without a vertical tail. The test cases have been inspected at different mach numbers and reduced frequencies. For all tested aircraft configurations the results were found to be equivalent to MSC.Nastran in a numerical sense. Using panels which are misaligned in y-direction provokes differences and errors.
 
-# Reference
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8343767.svg)](https://doi.org/10.5281/zenodo.8343767)
+
+# Theoretical Background & Reference
 Voß, A., “An Implementation of the Vortex Lattice and the Doublet Lattice Method,” Institut für Aeroelastik, Deutsches Zentrum für Luft- und Raumfahrt, Göttingen, Germany, Technical Report DLR-IB-AE-GO-2020-137, Oktober 2020, https://elib.dlr.de/136536/.
 
 If you use this software for your scientific work, we kindly ask you to include a reference to this report in your publications. Thank you!
@@ -47,10 +49,17 @@ We are interested in partnerships from both industry and academia, so feel free 
 If you discoverd an obvious bug, please open an [issue](https://github.com/DLR-AE/PanelAero/issues). In case you already know how to fix it, please provide your feedback via merge requests. For details, please see the [instructions](CONTRIBUTING.md) on how to provide a contribution or contact arne.voss@dlr.de if you need any assistance with that.
 
 # Continuous Integration
-Status of the (internal) DLR GitLab continuous integration pipelines:
+Status of the continuous integration pipelines / workflows:
 
-Master branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/master)
+[View test coverage](https://dlr-ae.github.io/PanelAero/coverage/)
 
-Development branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/devel/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/devel)
+Master branch 
 
-Test coverage [![coverage](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/coverage.svg)](https://loads-kernel.pages.gitlab.dlr.de/panel-aero/coverage/)
+[![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=master)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
+[![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=master)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
+
+Development branch 
+
+[![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
+[![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
+

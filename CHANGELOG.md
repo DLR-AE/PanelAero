@@ -1,3 +1,7 @@
+# Release 2024.01
+- Moved continuous integration workflows to GitHub.com
+- Added coding style analysis (Falke8 and Pylint) and applied formatting suggestions, there should be no functional changes.
+
 # Release 2023.04
 - Update of the documentation to Version 1.04
 - Added warning for upside down / flipped panels

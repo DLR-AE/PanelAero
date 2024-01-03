@@ -15,13 +15,13 @@ model.build_aerogrid()
 
 # run the DLM
 # with k = omega/U, the "classical" definition, not Nastran definition!
-Qjj = DLM.calc_Qjj(model.aerogrid, Ma=0.0, k=0.1) 
+Qjj = DLM.calc_Qjj(model.aerogrid, Ma=0.0, k=0.1)
 
 # set-up some generic onflow
 Vtas = 25.0
-q_dyn = 1.225/2.0 * Vtas**2
+q_dyn = 1.225 / 2.0 * Vtas ** 2
 # downwash of 1.0 m/s on every panel, scaled with Vtas
-wj = np.ones(model.aerogrid['n']) * 1.0/Vtas 
+wj = np.ones(model.aerogrid['n']) * 1.0 / Vtas
 # calculate the pressure coefficent distribution
 cp = Qjj.dot(wj)
 
@@ -33,6 +33,5 @@ plots.plot_aerogrid(cp.imag)
 
 # a force vector is calculated like this
 Fxyz = q_dyn * model.aerogrid['N'].T * model.aerogrid['A'] * Qjj.dot(wj)
-
 
 print('Done.')
