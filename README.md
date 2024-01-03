@@ -49,10 +49,17 @@ We are interested in partnerships from both industry and academia, so feel free 
 If you discoverd an obvious bug, please open an [issue](https://github.com/DLR-AE/PanelAero/issues). In case you already know how to fix it, please provide your feedback via merge requests. For details, please see the [instructions](CONTRIBUTING.md) on how to provide a contribution or contact arne.voss@dlr.de if you need any assistance with that.
 
 # Continuous Integration
-Status of the (internal) DLR GitLab continuous integration pipelines:
+Status of the continuous integration pipelines / workflows:
 
-Master branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/master)
+[View test coverage](https://dlr-ae.github.io/PanelAero/coverage/)
 
-Development branch [![pipeline status](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/devel/pipeline.svg)](https://gitlab.dlr.de/loads-kernel/panel-aero/-/commits/devel)
+Master branch 
 
-Test coverage [![coverage](https://gitlab.dlr.de/loads-kernel/panel-aero/badges/master/coverage.svg)](https://loads-kernel.pages.gitlab.dlr.de/panel-aero/coverage/)
+[![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=master)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
+[![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=master)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
+
+Development branch 
+
+[![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
+[![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
+

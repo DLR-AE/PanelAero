@@ -34,10 +34,39 @@ jobs:
         # Create some reports
         coverage report
         coverage xml -o coverage.xml
-        coverage html --directory ./coverage
-    - name: Upload HTML coverage report
+        # Put the html into a 2nd-level sub-folder and use 1st-level subfolder for uploading to maintain folder
+        coverage html --directory ./coverage/coverage
+    - name: Upload HTML coverage report as an artifact
       uses: actions/upload-artifact@v3
       with:
         name: coverage
         path: ./coverage
         if-no-files-found: ignore
+    - name: Upload HTML coverage report for pages
+      # This is not a normal artifact but one that can be deployed to the GitHub pages in the next step
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: github-pages # This name may not be changed according to the documentation
+        path: ./coverage
+        if-no-files-found: ignore
+  
+  deploy-pages:
+    # Add a dependency to the build job
+    needs: Pytest
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
