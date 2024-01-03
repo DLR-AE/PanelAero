@@ -49,7 +49,9 @@ We are interested in partnerships from both industry and academia, so feel free 
 If you discoverd an obvious bug, please open an [issue](https://github.com/DLR-AE/PanelAero/issues). In case you already know how to fix it, please provide your feedback via merge requests. For details, please see the [instructions](CONTRIBUTING.md) on how to provide a contribution or contact arne.voss@dlr.de if you need any assistance with that.
 
 # Continuous Integration
-Status of the continuous integration pipelines:
+Status of the continuous integration pipelines / workflows:
+
+[View test coverage](https://dlr-ae.github.io/PanelAero/coverage/)
 
 Master branch 
 
@@ -60,3 +62,4 @@ Development branch
 
 [![Regression Tests](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/regression-tests.yml)
 [![Coding style](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml/badge.svg?branch=devel)](https://github.com/DLR-AE/PanelAero/actions/workflows/coding-style.yml)
+
