@@ -26,7 +26,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         # Install with -e (in editable mode) to allow the tracking of the test coverage
-        pip install -e .
+        pip install -e .[test]
     - name: Analyse the code with pytest
       run: |
         # Run the actual testing

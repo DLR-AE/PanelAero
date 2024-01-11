@@ -13,15 +13,14 @@ If you use this software for your scientific work, we kindly ask you to include 
 To install everything as a python package, including dependencies:
 
 ```
-pip install --user git+https://github.com/DLR-AE/PanelAero.git
+pip install git+https://github.com/DLR-AE/PanelAero.git
 ```
 ## How can I use it?
 
 In Python, you can import the VLM or the DLM as shown below. For further details, please see the example section.
 
 ```
-import panelaero.VLM as VLM
-import panelaero.DLM as DLM
+from panelaero import VLM, DLM
 ```
 
 ## Developer installation 
@@ -29,8 +28,8 @@ As above, but with access to the code (keep the code where it is so that you can
 
 ```
 git clone https://github.com/DLR-AE/PanelAero.git
-cd ./panel-aero
-pip install --user -e . 
+cd <local_repo_path>
+pip install -e . 
 ```
 
 # License

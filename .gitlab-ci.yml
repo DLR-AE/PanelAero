@@ -7,8 +7,8 @@ stages:
   - deploy
 
 .virtenv: &virtualenv
-  - python -m venv buildenv
-  - . buildenv/bin/activate
+  - python -m venv virtualenv
+  - source virtualenv/bin/activate
 
 build:
   # This stage only tests if the installation is possible.
@@ -31,11 +31,11 @@ test:
   script:
     - *virtualenv
     # Install with -e (in editable mode) to allow the tracking of the test coverage
-    - pip install -e .
+    - pip install -e .[test]
     - which python
     - which pytest
     # Run the actual testing
-    - pytest -v --basetemp=./test_tmp --cov-report xml:coverage.xml --cov=panelaero --junitxml=testresult.xml
+    - pytest -v --basetemp=./tmp --cov-report xml:coverage.xml --cov=panelaero --junitxml=testresult.xml
     - coverage xml -o coverage.xml
     - coverage report
     - coverage html --directory ./coverage
