@@ -6,8 +6,8 @@ import numpy as np
 
 # Import from this repository
 from panelaero import DLM
-from example.build_aeromodel import AeroModel
-from example.plotting import DetailedPlots
+from tutorials.helper_functions.build_aeromodel import AeroModel
+from tutorials.helper_functions.plotting import DetailedPlots
 
 # build a model that includes the aerodynmic grid
 model = AeroModel('./simplewing.CAERO1')

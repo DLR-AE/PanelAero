@@ -12,7 +12,7 @@ class DetailedPlots():
     def __init__(self, model):
         self.model = model
 
-    def plot_aerogrid(self, scalars=None, colormap='plasma', value_min=None, value_max=None):
+    def plot_aerogrid(self, scalars=None, colormap='plasma', embed_in_notebook=False):
         # create the unstructured grid
         points = self.model.aerogrid['cornerpoint_grids'][:, (1, 2, 3)]
         ug = tvtk.UnstructuredGrid(points=points)
@@ -24,28 +24,25 @@ class DetailedPlots():
         ug.cell_data.scalars = scalars
 
         # hand over unstructured grid to mayavi
-        mlab.figure(bgcolor=(1, 1, 1))
+        if embed_in_notebook:
+            mlab.init_notebook('png')
+        mlab.figure(bgcolor=(1, 1, 1), size=(900,450))
         src_aerogrid = mlab.pipeline.add_dataset(ug)
 
         # determine if suitable scalar data is given
         if scalars is not None:
-            # determine an upper and lower limit of the colorbar, if not given
-            if value_min is None:
-                value_min = scalars.min()
-            if value_max is None:
-                value_max = scalars.max()
             surface = mlab.pipeline.surface(src_aerogrid, opacity=1.0, line_width=0.5,
-                                            colormap=colormap, vmin=value_min, vmax=value_max)
+                                            colormap=colormap, vmin=scalars.min(), vmax=scalars.max())
             surface.actor.mapper.scalar_visibility = True
 
             surface.module_manager.scalar_lut_manager.show_legend = True
             surface.module_manager.scalar_lut_manager.data_name = ''
             surface.module_manager.scalar_lut_manager.label_text_property.color = (0, 0, 0)
-            surface.module_manager.scalar_lut_manager.label_text_property.font_family = 'times'
+            surface.module_manager.scalar_lut_manager.label_text_property.font_family = 'arial'
             surface.module_manager.scalar_lut_manager.label_text_property.bold = False
             surface.module_manager.scalar_lut_manager.label_text_property.italic = False
             surface.module_manager.scalar_lut_manager.title_text_property.color = (0, 0, 0)
-            surface.module_manager.scalar_lut_manager.title_text_property.font_family = 'times'
+            surface.module_manager.scalar_lut_manager.title_text_property.font_family = 'arial'
             surface.module_manager.scalar_lut_manager.title_text_property.bold = False
             surface.module_manager.scalar_lut_manager.title_text_property.italic = False
             surface.module_manager.scalar_lut_manager.number_of_labels = 5
@@ -53,4 +50,9 @@ class DetailedPlots():
             surface = mlab.pipeline.surface(src_aerogrid, opacity=1.0, line_width=0.5)
             surface.actor.mapper.scalar_visibility = False
         surface.actor.property.edge_visibility = True
-        mlab.show()
+        mlab.view(azimuth=60.0, elevation=-65.0, roll=55.0)
+        
+        if embed_in_notebook:
+            return surface
+        else:
+            mlab.show()
