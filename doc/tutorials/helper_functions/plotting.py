@@ -26,7 +26,7 @@ class DetailedPlots():
         # hand over unstructured grid to mayavi
         if embed_in_notebook:
             mlab.init_notebook('png')
-        mlab.figure(bgcolor=(1, 1, 1), size=(600,450))
+        mlab.figure(bgcolor=(1, 1, 1), size=(600, 450))
         src_aerogrid = mlab.pipeline.add_dataset(ug)
 
         # determine if suitable scalar data is given
@@ -47,7 +47,7 @@ class DetailedPlots():
             surface.actor.mapper.scalar_visibility = False
         surface.actor.property.edge_visibility = True
         mlab.view(azimuth=60.0, elevation=-65.0, roll=55.0)
-        
+
         if embed_in_notebook:
             return surface
         else:
