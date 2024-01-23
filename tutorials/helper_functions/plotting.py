@@ -26,7 +26,7 @@ class DetailedPlots():
         # hand over unstructured grid to mayavi
         if embed_in_notebook:
             mlab.init_notebook('png')
-        mlab.figure(bgcolor=(1, 1, 1), size=(900,450))
+        mlab.figure(bgcolor=(1, 1, 1), size=(600,450))
         src_aerogrid = mlab.pipeline.add_dataset(ug)
 
         # determine if suitable scalar data is given
@@ -41,10 +41,6 @@ class DetailedPlots():
             surface.module_manager.scalar_lut_manager.label_text_property.font_family = 'arial'
             surface.module_manager.scalar_lut_manager.label_text_property.bold = False
             surface.module_manager.scalar_lut_manager.label_text_property.italic = False
-            surface.module_manager.scalar_lut_manager.title_text_property.color = (0, 0, 0)
-            surface.module_manager.scalar_lut_manager.title_text_property.font_family = 'arial'
-            surface.module_manager.scalar_lut_manager.title_text_property.bold = False
-            surface.module_manager.scalar_lut_manager.title_text_property.italic = False
             surface.module_manager.scalar_lut_manager.number_of_labels = 5
         else:
             surface = mlab.pipeline.surface(src_aerogrid, opacity=1.0, line_width=0.5)
