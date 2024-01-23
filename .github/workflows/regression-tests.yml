@@ -53,14 +53,21 @@ jobs:
       matrix:
         # Select Python version to be used for compiling here.
         python-version: ["3.10"]
+    # Step 1 to make GUIs work, see https://pytest-qt.readthedocs.io/en/latest/troubleshooting.html
+    env:
+      DISPLAY: ':99.0'
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    # Step 2 to make GUIs work
+    - uses: tlambert03/setup-qt-libs@v1
     - name: Install dependencies
       run: |
+        # Step 3 to make GUIs work
+        /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1920x1200x24 -ac +extension GLX
         python -m pip install --upgrade pip
         # Install the package itself to make sure that all imports work.
         pip install .[tutorials]
