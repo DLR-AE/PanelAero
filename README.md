@@ -9,21 +9,20 @@ Voß, A., “An Implementation of the Vortex Lattice and the Doublet Lattice Met
 If you use this software for your scientific work, we kindly ask you to include a reference to this report in your publications. Thank you!
 
 # Installation & Use
-## User installation 
-To install everything as a python package, including dependencies:
+## Basic Installation 
+Install Panel Aero as a python package with core dependencies via:
 
 ```
 pip install git+https://github.com/DLR-AE/PanelAero.git
 ```
 ## How can I use it?
-
-In Python, you can import the VLM or the DLM as shown below. For further details, please see the example section.
+In Python, you can import the VLM or the DLM as shown below. For further details, please see the Tutorials section.
 
 ```
 from panelaero import VLM, DLM
 ```
 
-## Developer installation 
+## Advanced Installation 
 As above, but with access to the code (keep the code where it is so that you can explore and modify):
 
 ```
@@ -31,6 +30,23 @@ git clone https://github.com/DLR-AE/PanelAero.git
 cd <local_repo_path>
 pip install -e . 
 ```
+
+## Tutorials & Examples
+There are is a growing number of tutorials based on Jupyter notebooks. You can either have a look at the static html tutorials or use the Jupyter notebooks interactively. For the latter, start a jupyter notebook server, which will open a dashboard in your web browser. Then open one of the *.ipynb notebooks from ./doc/tutorials and walk through the tutorials step-by-step.
+
+[View static html tutorials](https://dlr-ae.github.io/PanelAero/tutorials/)
+
+or
+
+```
+jupyter notebook
+```
+Any missing dependencies (probably jupyter and mayavi) can be installed with:
+
+```
+pip install -e .[tutorials]
+```
+
 
 # License
 This software is developed for scientific applications and is delivered as open source without any liability (BSD 3-Clause, please see the [license](LICENSE) for details). For every new aircraft, a validation against test data and/or other simulation tools is highly recommended and in the responsibility of the user. 
