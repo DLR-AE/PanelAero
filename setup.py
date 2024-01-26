@@ -1,8 +1,6 @@
 """
-Setup file, currently supports:
-
-- installation via "pip install --user <repo_url>"
-- installation via "python setup.py install --user"
+Install Panel Aero with core dependencies via:
+- pip install -e <local_repo_path>
 """
 
 from setuptools import setup, find_packages
@@ -18,10 +16,15 @@ def my_setup():
           license='BSD 3-Clause License',
           packages=find_packages(),
           python_requires='>=3.7',
-          install_requires=[
-              'numpy',
-              'pytest',
-              'pytest-cov',],
+          install_requires=['numpy'],
+          extras_require={'test': ['pytest',
+                                   'pytest-cov',
+                                   ],
+                          'tutorials': ['jupyter',
+                                        'jupyter-book',
+                                        'mayavi',
+                                        ]
+                          },
           )
 
 
