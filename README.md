@@ -16,7 +16,7 @@ Install Panel Aero as a python package with core dependencies via:
 pip install git+https://github.com/DLR-AE/PanelAero.git
 ```
 ## How can I use it?
-In Python, you can import the VLM or the DLM as shown below. For further details, please see the Tutorials section.
+In Python, you can import the VLM or the DLM as shown below. For further details, please see the Tutorials section. This is no stand-alone aerodynamic software but is intended to be integrated in other software, for example for loads and aeroelastic analyses.
 
 ```
 from panelaero import VLM, DLM
@@ -32,9 +32,9 @@ pip install -e .
 ```
 
 ## Tutorials & Examples
-There are is a growing number of tutorials based on Jupyter notebooks. You can either have a look at the static html tutorials or use the Jupyter notebooks interactively. For the latter, start a jupyter notebook server, which will open a dashboard in your web browser. Then open one of the *.ipynb notebooks from ./doc/tutorials and walk through the tutorials step-by-step.
+There is a growing number of tutorials based on Jupyter notebooks. You can either have a look at the static html tutorials or use the Jupyter notebooks interactively. For the latter, start a jupyter notebook server, which will open a dashboard in your web browser. Then open one of the *.ipynb notebooks from ./doc/tutorials and walk through the tutorials step-by-step.
 
-[View static html tutorials](https://dlr-ae.github.io/PanelAero/tutorials/)
+[View html tutorials](https://dlr-ae.github.io/PanelAero/tutorials/)
 
 or
 
@@ -46,7 +46,6 @@ Any missing dependencies (probably jupyter and mayavi) can be installed with:
 ```
 pip install -e .[tutorials]
 ```
-
 
 # License
 This software is developed for scientific applications and is delivered as open source without any liability (BSD 3-Clause, please see the [license](LICENSE) for details). For every new aircraft, a validation against test data and/or other simulation tools is highly recommended and in the responsibility of the user. 
