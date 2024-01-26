@@ -19,7 +19,12 @@ def my_setup():
           install_requires=['numpy'],
           extras_require={'test': ['pytest',
                                    'pytest-cov',
-                                   ]},
+                                   ],
+                          'tutorials': ['jupyter',
+                                        'jupyter-book',
+                                        'mayavi',
+                                        ]
+                          },
           )
 
 

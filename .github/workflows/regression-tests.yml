@@ -1,6 +1,4 @@
-# This workflow will install and then lint the code with Flake8 and Pylint.
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
+# This workflow will run some regression tests.
 name: Regression Tests
 
 on:
@@ -10,11 +8,12 @@ on:
     branches: '*'
 
 jobs:
+  
   Pytest:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      # Add multiple Python versions here to run tests on new(er) versions.
+        # Add multiple Python versions here to run tests on new(er) versions.
         python-version: ["3.10"]
     steps:
     - uses: actions/checkout@v3
@@ -30,30 +29,86 @@ jobs:
     - name: Analyse the code with pytest
       run: |
         # Run the actual testing
-        pytest -v --cov=panelaero --junitxml=testresult.xml
+        pytest -v --basetemp=./tmp --cov=panelaero --junitxml=testresult.xml
         # Create some reports
         coverage report
         coverage xml -o coverage.xml
         # Put the html into a 2nd-level sub-folder and use 1st-level subfolder for uploading to maintain folder
-        coverage html --directory ./coverage/coverage
-    - name: Upload HTML coverage report as an artifact
-      uses: actions/upload-artifact@v3
+        coverage html --directory ./coverage
+    - name: Upload test restults and coverage as an artifact
+      uses: actions/upload-artifact@v4
       with:
-        name: coverage
-        path: ./coverage
+        name: test results and coverage
+        path: |
+          testresult.xml
+          coverage.xml
+          coverage
         if-no-files-found: ignore
-    - name: Upload HTML coverage report for pages
+  
+  Jupyter:
+    # Building the Jupyter book is not really a regression test. However, it has to be in this workflow due to the handling of 
+    # the artifacts.
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Select Python version to be used for compiling here.
+        python-version: ["3.10"]
+    # Step 1 to make GUIs work, see https://pytest-qt.readthedocs.io/en/latest/troubleshooting.html
+    env:
+      DISPLAY: ':99.0'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    # Step 2 to make GUIs work
+    - uses: tlambert03/setup-qt-libs@v1
+    - name: Install dependencies
+      run: |
+        # Step 3 to make GUIs work
+        /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1920x1200x24 -ac +extension GLX
+        python -m pip install --upgrade pip
+        # Install the package itself to make sure that all imports work.
+        pip install .[tutorials]
+    - name: Assemble the tutorials to a jupyter book and build htlm pages
+      run: |
+        jupyter-book build ./doc/tutorials
+        # Put the html into a 2nd-level sub-folder and use 1st-level subfolder for uploading
+        mkdir ./doc/html
+        mv ./doc/tutorials/_build/html ./doc/html/tutorials
+    - name: Upload Jupyter book as an artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: tutorials
+        path: ./doc/html
+        if-no-files-found: ignore
+  
+  combine-pages:
+    runs-on: ubuntu-latest
+    # Add a dependency to the build job
+    needs: [Jupyter, Pytest]
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        merge-multiple: true
+    - name: See what we've got and merge artifacts
+      run: |
+        ls -la
+        mkdir pages
+        mv ./tutorials ./pages/tutorials
+        mv ./coverage ./pages/coverage
+    - name: Upload artifact for pages
       # This is not a normal artifact but one that can be deployed to the GitHub pages in the next step
       uses: actions/upload-pages-artifact@v3
       with:
-        name: github-pages # This name may not be changed according to the documentation
-        path: ./coverage
+        name: github-pages  # This name may not be changed according to the documentation
+        path: ./pages  # There must be only one path
         if-no-files-found: ignore
-  
+    
   deploy-pages:
     # Add a dependency to the build job
-    needs: Pytest
-
+    needs: combine-pages
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages
