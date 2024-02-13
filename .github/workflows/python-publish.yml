@@ -1,7 +1,6 @@
-# This workflow will upload a Python Package using Twine when a release is created
+# This workflow will upload a Python Package using when a release is created.
 # For more information see: 
 # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
-# and 
 # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows
 
 name: Upload Python Package
@@ -52,5 +51,5 @@ jobs:
       with:
         name: python-package-distributions
         path: dist/
-    - name: Publish distribution 📦 to PyPI
+    - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
