@@ -1,3 +1,6 @@
+# Release 2024.02
+- Publish as PyPi package
+
 # Release 2024.01
 - Moved continuous integration workflows to GitHub.com
 - Added coding style analysis (Falke8 and Pylint) and applied formatting suggestions, there should be no functional changes.

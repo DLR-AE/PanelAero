@@ -11,6 +11,7 @@ If you use this software for your scientific work, we kindly ask you to include 
 # Installation & Use
 ## Basic Installation 
 Install Panel Aero as a python package with core dependencies via:
+
 ```
 pip install PanelAero
 ```
