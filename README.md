@@ -13,8 +13,9 @@ If you use this software for your scientific work, we kindly ask you to include 
 Install Panel Aero as a python package with core dependencies via:
 
 ```
-pip install git+https://github.com/DLR-AE/PanelAero.git
+pip install PanelAero
 ```
+
 ## How can I use it?
 In Python, you can import the VLM or the DLM as shown below. For further details, please see the Tutorials section. This is no stand-alone aerodynamic software but is intended to be integrated in other software, for example for loads and aeroelastic analyses.
 
