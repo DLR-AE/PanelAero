@@ -38,7 +38,7 @@ jobs:
         name: python-package-distributions
         path: dist/
 
-publish-to-pypi:
+  publish-to-pypi:
     name: Publish to PyPI
     needs:
     - build
