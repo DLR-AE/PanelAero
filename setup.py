@@ -7,9 +7,11 @@ from setuptools import setup, find_packages
 
 
 def my_setup():
-    setup(name='Panel-Aero',
+    setup(name='PanelAero',
           version='2024.01',
           description='An Implementation of the Vortex Lattice and the Doublet Lattice Method.',
+          long_description=open('README.md').read(),
+          long_description_content_type='text/markdown',
           url='https://github.com/DLR-AE/PanelAero',
           author='Arne Voß',
           author_email='arne.voss@dlr.de',
