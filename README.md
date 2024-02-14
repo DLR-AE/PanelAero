@@ -10,10 +10,16 @@ If you use this software for your scientific work, we kindly ask you to include 
 
 # Installation & Use
 ## Basic Installation 
-Install Panel Aero as a python package with core dependencies via:
+Install Panel Aero as a python package with its core dependencies using a package manager (PyPI or Conda):
 
 ```
 pip install PanelAero
+```
+
+or
+
+```
+conda install -c conda-forge PanelAero
 ```
 
 ## How can I use it?
@@ -24,7 +30,7 @@ from panelaero import VLM, DLM
 ```
 
 ## Advanced Installation 
-As above, but with access to the code (keep the code where it is so that you can explore and modify):
+As above, but with access to the code (download and keep the code where it is so that you can explore and modify):
 
 ```
 git clone https://github.com/DLR-AE/PanelAero.git
