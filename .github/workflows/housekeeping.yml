@@ -3,14 +3,14 @@
 # You can adjust the behavior by modifying this file.
 # For more information, see:
 # https://github.com/actions/stale
-name: Mark stale issues and pull requests
+name: Housekeeping
 
 on:
   schedule:
   - cron: '45 13 * * *'
 
 jobs:
-  stale:
+  Stale:
 
     runs-on: ubuntu-latest
     permissions:
