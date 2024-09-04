@@ -77,6 +77,8 @@ jobs:
         pip install .[tutorials]
     - name: Assemble the tutorials to a jupyter book and build htlm pages
       run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate jupyter_env
         jupyter-book build ./doc/tutorials
         # Put the html into a 2nd-level sub-folder and use 1st-level subfolder for uploading
         mkdir ./doc/html
