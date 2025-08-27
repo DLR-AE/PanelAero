@@ -1,3 +1,6 @@
+# Release 2025.08
+- Maintenance of tutorials and build workflows
+
 # Release 2024.02
 - Publish as PyPi package
 
