@@ -6,6 +6,8 @@ on:
     branches: ['master', 'devel']
   pull_request:
     branches: '*'
+  schedule:
+    - cron: '0 2 * * 0'
 
 jobs:
   
@@ -68,7 +70,6 @@ jobs:
       run: |
         # Step 3 to make GUIs work
         /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1920x1200x24 -ac +extension GLX
-        python -m pip install --upgrade pip
         # Install the package itself to make sure that all imports work.
         pip install .[tutorials]
     - name: Assemble the tutorials to a jupyter book and build htlm pages
@@ -89,7 +90,7 @@ jobs:
     # Add a dependency to the build job
     needs: [Jupyter, Pytest]
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v4.1.7
       with:
         merge-multiple: true
     - name: See what we've got and merge artifacts

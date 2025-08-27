@@ -23,8 +23,8 @@ def my_setup():
                                    'pytest-cov',
                                    ],
                           'tutorials': ['jupyter',
-                                        'jupyter-book==0.15.1',  # version 1.0.0 fails, wait for updates
-                                        'mayavi',
+                                        'jupyter-book',
+                                        'matplotlib',
                                         ]
                           },
           )
