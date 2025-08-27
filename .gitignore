@@ -1,3 +1,7 @@
 *.pyc
 .pytest_cache/
 Panel_Aero.egg-info/
+.settings/
+.vscode/
+.project
+.pydevproject

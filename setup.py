@@ -24,7 +24,7 @@ def my_setup():
                                    ],
                           'tutorials': ['jupyter',
                                         'jupyter-book',
-                                        'mayavi',
+                                        'matplotlib',
                                         ]
                           },
           )
