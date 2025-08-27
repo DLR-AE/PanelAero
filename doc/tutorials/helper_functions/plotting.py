@@ -1,10 +1,6 @@
 import numpy as np
-
-try:
-    from mayavi import mlab
-    from tvtk.api import tvtk
-except Exception:
-    pass
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 
 class DetailedPlots():
@@ -12,43 +8,75 @@ class DetailedPlots():
     def __init__(self, model):
         self.model = model
 
-    def plot_aerogrid(self, scalars=None, colormap='plasma', embed_in_notebook=False):
-        # create the unstructured grid
+    def plot_aerogrid(self, scalars=None, colormap='plasma'):
+        """
+        Plot the aerodynamic grid using Matplotlib's 3D plotting of polygons.
+
+        Parameters:
+        -----------
+        scalars : array-like, optional
+            Values to use for coloring the panels
+        colormap : str, default='plasma'
+            Matplotlib colormap name
+        """
+        # Create figure and 3D axes
+        fig = plt.figure(figsize=(16, 9))
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Get points and create panels
         points = self.model.aerogrid['cornerpoint_grids'][:, (1, 2, 3)]
-        ug = tvtk.UnstructuredGrid(points=points)
-        shells = []
-        for shell in self.model.aerogrid['cornerpoint_panels']:
-            shells.append([np.where(self.model.aerogrid['cornerpoint_grids'][:, 0] == id)[0][0] for id in shell])
-        shell_type = tvtk.Polygon().cell_type
-        ug.set_cells(shell_type, shells)
-        ug.cell_data.scalars = scalars
+        panels = []
+        for panel in self.model.aerogrid['cornerpoint_panels']:
+            # Get corner points for each panel
+            panel_points = [points[np.where(self.model.aerogrid['cornerpoint_grids'][:, 0] == id)[0][0]]
+                            for id in panel]
+            panels.append(panel_points)
 
-        # hand over unstructured grid to mayavi
-        if embed_in_notebook:
-            mlab.init_notebook('png')
-        mlab.figure(bgcolor=(1, 1, 1), size=(600, 450))
-        src_aerogrid = mlab.pipeline.add_dataset(ug)
+        # Create 3D collection of polygons
+        poly3d = Poly3DCollection(panels, edgecolor='black', linewidth=0.2)
 
-        # determine if suitable scalar data is given
+        # Set face colors based on scalars if provided
         if scalars is not None:
-            surface = mlab.pipeline.surface(src_aerogrid, opacity=1.0, line_width=0.5,
-                                            colormap=colormap, vmin=scalars.min(), vmax=scalars.max())
-            surface.actor.mapper.scalar_visibility = True
+            cmap = plt.get_cmap(colormap)
+            norm = plt.Normalize(vmin=np.min(scalars), vmax=np.max(scalars))
+            poly3d.set_facecolor(cmap(norm(scalars)))
+            poly3d.set_alpha(1.0)
 
-            surface.module_manager.scalar_lut_manager.show_legend = True
-            surface.module_manager.scalar_lut_manager.data_name = ''
-            surface.module_manager.scalar_lut_manager.label_text_property.color = (0, 0, 0)
-            surface.module_manager.scalar_lut_manager.label_text_property.font_family = 'arial'
-            surface.module_manager.scalar_lut_manager.label_text_property.bold = False
-            surface.module_manager.scalar_lut_manager.label_text_property.italic = False
-            surface.module_manager.scalar_lut_manager.number_of_labels = 5
+            # Add colorbar
+            sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+            sm.set_array([])
+            plt.colorbar(sm, ax=ax)
         else:
-            surface = mlab.pipeline.surface(src_aerogrid, opacity=1.0, line_width=0.5)
-            surface.actor.mapper.scalar_visibility = False
-        surface.actor.property.edge_visibility = True
-        mlab.view(azimuth=60.0, elevation=-65.0, roll=55.0)
+            poly3d.set_facecolor('white')
+            poly3d.set_alpha(0.7)
 
-        if embed_in_notebook:
-            return surface
-        else:
-            mlab.show()
+        # Add collection to axes
+        ax.add_collection3d(poly3d)
+
+        # Set labels
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+
+        # Set equal aspect ratio for all axes
+        # This needs to be calculated manually with the center as reference point
+        x_range = points[:, 0].max() - points[:, 0].min()
+        y_range = points[:, 1].max() - points[:, 1].min()
+        z_range = points[:, 2].max() - points[:, 2].min()
+        max_range = max(x_range, y_range, z_range)
+
+        mid_x = (points[:, 0].max() + points[:, 0].min()) * 0.5
+        mid_y = (points[:, 1].max() + points[:, 1].min()) * 0.5
+        mid_z = (points[:, 2].max() + points[:, 2].min()) * 0.5
+
+        ax.set_xlim(mid_x - max_range * 0.5, mid_x + max_range * 0.5)
+        ax.set_ylim(mid_y - max_range * 0.5, mid_y + max_range * 0.5)
+        ax.set_zlim(mid_z - max_range * 0.5, mid_z + max_range * 0.5)
+
+        # Set equal box aspect
+        ax.set_box_aspect((1, 1, 1))
+
+        # Set default view angle
+        ax.view_init(elev=40, azim=-120)
+
+        plt.show()
