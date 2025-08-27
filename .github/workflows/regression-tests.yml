@@ -6,6 +6,8 @@ on:
     branches: ['master', 'devel']
   pull_request:
     branches: '*'
+  schedule:
+    - cron: '0 2 * * 0'
 
 jobs:
   
@@ -68,17 +70,10 @@ jobs:
       run: |
         # Step 3 to make GUIs work
         /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1920x1200x24 -ac +extension GLX
-        # Install same requirements as to be used during regression testing
-        source $CONDA/etc/profile.d/conda.sh
-        conda create -n jupyter_env python=${{ matrix.python-version }}
-        conda activate jupyter_env
-        conda install -y -c conda-forge mayavi  || true
         # Install the package itself to make sure that all imports work.
         pip install .[tutorials]
     - name: Assemble the tutorials to a jupyter book and build htlm pages
       run: |
-        source $CONDA/etc/profile.d/conda.sh
-        conda activate jupyter_env
         jupyter-book build ./doc/tutorials
         # Put the html into a 2nd-level sub-folder and use 1st-level subfolder for uploading
         mkdir ./doc/html
