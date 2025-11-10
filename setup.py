@@ -23,7 +23,7 @@ def my_setup():
                                    'pytest-cov',
                                    ],
                           'tutorials': ['jupyter',
-                                        'jupyter-book',
+                                        'jupyter-book==1.0.4',  # Jupyter book 2.xx is not yet generating static html pages
                                         'matplotlib',
                                         ]
                           },
